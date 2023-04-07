@@ -4,6 +4,6 @@ CREATE TABLE yarn (
     id serial PRIMARY KEY,
     size varchar(2),
     name_ varchar(255),
-    fiber varchar(100),
+    fiber_type varchar(100),
     brand varchar(100)
 )
