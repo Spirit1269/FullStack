@@ -1,0 +1,19 @@
+### Test
+GET http://localhost:3007/
+
+### Get All Yarn
+GET http://localhost:3007/yarn
+
+### INSERT Yarn
+POST http://localhost:3007/yarn
+Content-Type: application/json
+
+{
+    "size": "6",
+    "name": "Yarn Bee",
+    "fiber_type": "acrylic",
+    "brand": "Hobby Lobby"
+}
+
+
+
