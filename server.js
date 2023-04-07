@@ -18,7 +18,7 @@ pool.connect();
 app.get('/', (req, res) => {
     res.send("Welcome to the Yarn DB")
 })
-app.get('/yarn', (req, res) => {
+app.get('/api/yarn', (req, res) => {
     pool
         .query('SELECT * FROM yarn_db')
         .then((result)=> {
@@ -28,19 +28,21 @@ app.get('/yarn', (req, res) => {
     .catch((e) => console.error(e.stack))
 })
 
-app.post('/yarn', (req, res) => {
-       pool.query('INSERT INTO yarn (name, size, fiber_type, brand) VALUES ($1, $2, $3, $4) RETURNING * ',[
+app.post('/api/yarn', (req, res) => {
+       pool.query('INSERT INTO yarn (name, size, fiber_type, brand, color, length) VALUES ($1, $2, $3, $4, $5, $6) RETURNING * ',[
            req.body.name, 
            req.body.size, 
            req.body.fiber_type,
+           req.body.color,
+           req.body.length,
            req.body.brand
         ])
-         .then((RESULT) => {
+         .then((result) => {
             res.send(result.rows);
         })
     }); 
 
-app.patch('/yarn/:yarnID', (req, res) => {
+app.patch('/api/yarn/:yarnID', (req, res) => {
       let key = Object.keys(req.body)[0];
       let value = Object.values(req.body)[0];
       pool.query('UPDATE yarn SET ' + key + ' = $1 WHERE id = $2', [value, req.params.yarnID])
